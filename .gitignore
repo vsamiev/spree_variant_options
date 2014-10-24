@@ -11,3 +11,5 @@ capybara-*.html
 
 # For Rspec
 spec/dummy
+
+tmp/**

@@ -23,7 +23,21 @@ require 'pry'
 require 'capybara/rspec'
 require 'capybara/rails'
 
-Capybara.default_wait_time = 5
+require 'capybara/poltergeist'
+Capybara.javascript_driver = :poltergeist
+options = {
+  js_errors: false,
+  timeout: 240,
+  phantomjs_logger: StringIO.new,
+  logger: nil,
+  phantomjs_options: ['--load-images=no', '--ignore-ssl-errors=yes']
+}
+
+Capybara.register_driver :poltergeist do |app|
+  Capybara::Poltergeist::Driver.new(app, options)
+end
+Capybara.default_wait_time = 10
+Capybara.default_host = 'localhost:3000'
 
 Dir[File.join(File.dirname(__FILE__), 'support/**/*.rb')].each { |f| require f }
 
@@ -38,6 +52,7 @@ RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
   config.include Spree::TestingSupport::UrlHelpers
   config.include Spree::TestingSupport::AuthorizationHelpers::Controller
+  config.include Capybara::DSL
 
   config.mock_with :rspec
   config.color = true
@@ -48,13 +63,29 @@ RSpec.configure do |config|
     DatabaseCleaner.clean_with :truncation
   end
 
-  config.before do
-    DatabaseCleaner.strategy = example.metadata[:js] ? :truncation : :transaction
-    DatabaseCleaner.start
+  config.before(:each) do
+    DatabaseCleaner.strategy = :transaction
+  end
+
+  config.before(:each, js: true) do
+    DatabaseCleaner.strategy = :truncation
   end
 
   config.after do
     DatabaseCleaner.clean
+  end
+
+  config.after(:each, type: :feature) do |example| 
+    missing_translations = page.body.scan(/translation missing: #{I18n.locale}\.(.*?)[\s<\"&]/)
+    if missing_translations.any?
+      #binding.pry
+      puts "Found missing translations: #{missing_translations.inspect}"
+      puts "In spec: #{example.location}"
+    end
+    if ENV['LOCAL']  && example.exception
+      page.save_screenshot("tmp/capybara/screenshots/#{example.metadata[:description]}.png", full: true)
+      save_and_open_page
+    end
   end
 
   config.fail_fast = ENV['FAIL_FAST'] || false

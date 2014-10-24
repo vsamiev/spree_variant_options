@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe 'Product Images', js: true do
-  stub_authorization!
+RSpec.describe 'Product Images', type: :feature, js: true do
+  let(:user) { create(admin_user) }
 
   let(:file_path) { Rails.root + '../../spec/fixtures/thinking-cat.jpg' }
 

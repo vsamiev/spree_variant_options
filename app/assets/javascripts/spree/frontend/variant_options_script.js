@@ -194,7 +194,7 @@ function VariantOptions(params) {
 
       if (variants) {
         variants_ids = $.keys(variants);
-        show_variant_images(variants_ids);
+        show_variant_images(variants_ids.slice(0, 1));
       }
 
       $('#variant_id, form[data-form-type="variant"] input[name$="[variant_id]"]').val('');

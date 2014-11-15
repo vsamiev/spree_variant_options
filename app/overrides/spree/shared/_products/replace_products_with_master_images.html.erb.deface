@@ -11,7 +11,7 @@
             <%= link_to small_image(product.variants_for_option_value(option_value_by_color).first, :itemprop => "image"), url, :itemprop => 'url' %>
           </div>
           <%= link_to truncate(product.name, :length => 50), url, :class => 'info', :itemprop => "name", :title => product.name %>
-          <span class="product-name"><%= product.name %></span>
+          <span class="product-name"><%= product.name + ": " + option_value_by_color.presentation %></span>
           <span itemprop="offers" itemscope itemtype="http://schema.org/Offer">
             <span class="price selling" itemprop="price"><%= display_price(product) %>
           </span>

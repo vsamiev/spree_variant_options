@@ -4,7 +4,7 @@
     <% @product.grouped_option_values.each do |type, values| %>
       <div id="<%= dom_id(type) %>" class="variant-options index-<%= index %>">
         <h6 class="variant-option-type">
-          <%= label_tag 'option-value-name', Spree.t(:select_a, :index => index + 1, :name => type.presentation.downcase) %>&nbsp;
+          <%= label_tag 'option-value-name', Spree.t(:select_a, :index => index + 1, :name => type.presentation) %>&nbsp;
           <strong class='selection'></strong>
           <%= link_to "", "#clear", :class => "icon-remove clear-button clear-index-#{index}" %>
         </h6>
@@ -25,7 +25,6 @@
     <% end %>
 
     <%= hidden_field_tag "products[#{@product.id}]", "", :id => "variant_id", :class => "hidden" %>
-    <%= hidden_field_tag :variant_id, "", :class => "hidden" %>
     
     <script type="text/javascript">
     //<![CDATA[
@@ -37,7 +36,7 @@
         i18n: <%== {:out_of_stock => Spree.t(:out_of_stock), :variant_options_select => Spree.t(:variant_options_select) }.to_json -%>
       });
       $(function() {
-        $("[title='<%= @color %>']").click();
+        $("[title='<%= @main_option_value %>']").click();
       });
     //]]>
     </script>

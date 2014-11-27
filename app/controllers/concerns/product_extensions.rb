@@ -13,7 +13,7 @@ module ProductExtensions
   module InstanceMethods
     def show
       super
-      @color = params[:color]
+      @main_option_value = params[SpreeVariantOptions::VariantConfig.main_option_type_label]
     end
   end
 

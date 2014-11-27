@@ -30,6 +30,8 @@ To install Spree Variant Options, just add the following to your Gemfile:
 gem 'spree_variant_options', :git => 'git://github.com/sbounmy/spree_variant_options.git', :branch => "1-3-stable"
 # Spree 2.0.X
 gem 'spree_variant_options', :git => 'git://github.com/sbounmy/spree_variant_options.git', :branch => "2-0-stable"
+# Spree 2.4.X
+gem 'spree_variant_options', :git => 'git://github.com/AgilTec/spree_variant_options.git', :branch => "2-4-stable"
 ```
 
 If you're on an older version of Spree, please reference the [Versionfile](https://github.com/citrus/spree_variant_options/blob/master/Versionfile) for your Spree version.
@@ -67,6 +69,11 @@ Spree Variant Options comes with some handy options:
 
 - default_instock (default: false)
   If this is option is set to true, it will automatically preselect in-stock variant options.
+
+- main_option_type_id (default: 1)
+  This is the option type id that will be use for showing each variant in the home.
+- main_option_type_label (default: 'color')
+  This is the option type label that will be use as URL parameter to preselect the option in the product show page.
 
 These configuration options can be set in a config/initializers/spree_variant_options.rb file for example :
 ```ruby

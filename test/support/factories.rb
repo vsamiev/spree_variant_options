@@ -2,12 +2,12 @@ FactoryGirl.define do
 
   factory :product_with_variants, :parent => :base_product do
     after(:create) { |product|
-      size = Spree::OptionType.find_by_name('size') || create(:option_type, name: 'size', position: 1)
-      color = Spree::OptionType.find_by_name('color') || create(:option_type, name: 'color', position: 2)
+      size = Spree::OptionType.find_by_name('size') || create(:option_type, name: 'size', presentation: 'Size', position: 1)
+      color = Spree::OptionType.find_by_name('color') || create(:option_type, name: 'color', presentation: 'Color', position: 2)
 
-      sizes = %w(Small Medium Large X-Large).map{|i| create(:option_value, :presentation => i, :option_type => size) }
+      sizes = %w(Small Medium Large X-Large).map{|i| create(:option_value, :name => i.downcase, :presentation => i, :option_type => size) }
       colors = %w(Red Green Blue Yellow Purple Gray Black White).map{|i|
-        create(:option_value, :presentation => i, :option_type => color)
+        create(:option_value, :name => i.downcase, :presentation => i, :option_type => color)
       }
       product.variants = sizes.map{|i| colors.map{|j| create(:variant, :product => product, :option_values => [i, j]) }}.flatten
       product.option_types = Spree::OptionType.where(:name => %w(size color))

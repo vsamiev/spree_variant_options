@@ -7,17 +7,37 @@ require "rails/test_help"
 require 'ffaker'
 require "shoulda"
 require "sqlite3"
+require 'factory_girl_rails'
 
 begin; require "debugger"; rescue LoadError; end
 begin; require "turn"; rescue LoadError; end
 
-require 'spree/testing_support/factories'
+Spree::Zone.class_eval do
+  def self.global
+    find_by(name: 'GlobalZone') || FactoryGirl.create(:global_zone)
+  end
+end
 
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
 
 require 'capybara/rails'
 
-Capybara.default_driver = :selenium
+require 'capybara/poltergeist'
+Capybara.javascript_driver = :poltergeist
+options = {
+  js_errors: false,
+  timeout: 240,
+  phantomjs_logger: StringIO.new,
+  logger: nil,
+  phantomjs_options: ['--load-images=no', '--ignore-ssl-errors=yes']
+}
+
+Capybara.register_driver :poltergeist do |app|
+  Capybara::Poltergeist::Driver.new(app, options)
+end
+Capybara.default_wait_time = 10
+Capybara.default_host = 'localhost:3000'
+
 
 class ActionDispatch::IntegrationTest
   # Make the Capybara DSL available in all integration tests
@@ -33,6 +53,6 @@ class ActionDispatch::IntegrationTest
   end
 end
 
-class Test::Unit::TestCase
+class MiniTest::Unit::TestCase
   include FactoryGirl::Syntax::Methods
 end

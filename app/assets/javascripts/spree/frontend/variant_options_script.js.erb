@@ -6,6 +6,16 @@ $.extend({
   }
 });
 
+$.urlParam = function(name){
+    var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+    if (results==null){
+       return null;
+    }
+    else{
+       return results[1] || 0;
+    }
+}
+
 if (!Array.indexOf) Array.prototype.indexOf = function(obj) {
   for(var i = 0; i < this.length; i++){
     if(this[i] == obj) {
@@ -235,12 +245,12 @@ function VariantOptions(params) {
     if (!parent.has(a).length) {
       clear(divs.index(a.parents('.variant-options:first')));
     }
+    window.history.pushState("object or string", "Title", window.location.origin + window.location.pathname + "?<%=SpreeVariantOptions::VariantConfig.main_option_type_label%>=" + a.attr("title"));
     disable(buttons);
     var a = enable(a.addClass('selected'));
     parent.find('a.clear-button').css('display', 'inline-block');
     advance();
     handle_selected();
-
     variants = find_variant();
     toggle(variants);
   }

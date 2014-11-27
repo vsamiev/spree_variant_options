@@ -36,7 +36,8 @@
         i18n: <%== {:out_of_stock => Spree.t(:out_of_stock), :variant_options_select => Spree.t(:variant_options_select) }.to_json -%>
       });
       $(function() {
-        $("[title='<%= @main_option_value %>']").click();
+        url = $.urlParam('<%=SpreeVariantOptions::VariantConfig.main_option_type_label%>')
+        $("[title="+ url +"]").click();
       });
     //]]>
     </script>

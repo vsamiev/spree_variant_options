@@ -26,7 +26,8 @@
             <%= label_tag "option_type_#{option_type.id}", option_type.presentation %>
 
             <ul class="option-type-values">
-              <% option_values.each_with_index do |option_value, index| %>
+              <%  puts "option_values: #{option_values}"
+              option_values.each_with_index do |option_value, index| %>
                 <li>
                   <%= check_box_tag "image[viewable_id][#{option_type.id}][]", option_value.id, false, class: 'option-value', id: "#{option_value.id}_#{index}" %>
                   <%= label_tag "image[viewable_id][#{option_type.id}][#{option_type.id}]", option_value.presentation, for: "#{option_value.id}_#{index}" %>

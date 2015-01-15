@@ -20,7 +20,7 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
 
   # Runtime
-  spree_version = '~> 2.4.0'
+  spree_version = '~> 3.0.0.beta'
   s.add_dependency 'spree_api', spree_version
   s.add_dependency 'spree_core', spree_version
   s.add_dependency 'spree_frontend', spree_version
@@ -35,7 +35,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency('pry', '~> 0.10.0')
   s.add_development_dependency('m')
   s.add_development_dependency('ffaker')
-  s.add_development_dependency('factory_girl_rails', '~> 4.4.1')
+  s.add_development_dependency('factory_girl_rails', '~> 4.5')
   s.add_development_dependency('cucumber-rails',   '~> 1.4.1')
   s.add_development_dependency('database_cleaner', '~> 1.2.0')
   s.add_development_dependency('sqlite3',          '~> 1.3.0')

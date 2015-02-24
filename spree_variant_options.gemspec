@@ -28,10 +28,7 @@ Gem::Specification.new do |s|
 
   # Development
   s.add_development_dependency('spree_sample',     spree_version)
-  s.add_development_dependency('dummier',          '~> 0.3.2')
-  s.add_development_dependency('shoulda',          '~> 3.5.0')
-  s.add_development_dependency('shoulda-context',  '~> 1.2.1')
-  s.add_development_dependency('shoulda-matchers', '~> 2.6.1')
+  s.add_development_dependency 'rspec-rails',  '~> 3.1'
   s.add_development_dependency('pry', '~> 0.10.0')
   s.add_development_dependency('m')
   s.add_development_dependency('ffaker')

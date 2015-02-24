@@ -1,5 +1,5 @@
 ENV["RAILS_ENV"] = "test"
-ENV["RAILS_ROOT"] = File.expand_path("../../../test/dummy", __FILE__)
+ENV["RAILS_ROOT"] = File.expand_path("../../../spec/dummy", __FILE__)
 
 require "cucumber/rails"
 require "factory_girl"

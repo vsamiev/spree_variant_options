@@ -9,7 +9,7 @@
           <%= link_to "", "#clear", :class => "icon-remove clear-button clear-index-#{index}" %>
         </h6>
 
-        <ul class="variant-option-values" class='inline'>
+        <ul class="variant-option-values list-inline">
         <% values.sort_by(&:position).each do |value| %>
           <% classes = ["option-value"] %>
           <% unless (variants = @product.variants_for_option_value(value)).empty? %>
@@ -25,6 +25,7 @@
     <% end %>
 
     <%= hidden_field_tag "products[#{@product.id}]", "", :id => "variant_id", :class => "hidden" %>
+    <%= hidden_field_tag :variant_id, "", :class => "hidden" %>
     
     <script type="text/javascript">
     //<![CDATA[
@@ -36,7 +37,8 @@
         i18n: <%== {:out_of_stock => Spree.t(:out_of_stock), :variant_options_select => Spree.t(:variant_options_select) }.to_json -%>
       });
       $(function() {
-        $("[title='<%= @main_option_value %>']").click();
+        url = $.urlParam('<%=SpreeVariantOptions::VariantConfig.main_option_type_label%>')
+        $("[title="+ url +"]").click();
       });
     //]]>
     </script>

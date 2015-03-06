@@ -1,4 +1,4 @@
-# Spree Variant Options [![Build Status](https://travis-ci.org/tiagoamaro/spree_variant_options.svg?branch=2-2-stable)](https://travis-ci.org/tiagoamaro/spree_variant_options)
+# Spree Variant Options [![Build Status](https://travis-ci.org/AgilTec/spree_variant_options.svg?branch=2-2-stable)](https://travis-ci.org/AgilTec/spree_variant_options)
 
 
 Spree Variant Options is a very simple spree extension that replaces the radio-button variant selection with groups of option types and values. To get a better idea let's let a few images do the explaining.
@@ -32,6 +32,8 @@ gem 'spree_variant_options', :git => 'git://github.com/sbounmy/spree_variant_opt
 gem 'spree_variant_options', :git => 'git://github.com/sbounmy/spree_variant_options.git', :branch => "2-0-stable"
 # Spree 2.4.X
 gem 'spree_variant_options', :git => 'git://github.com/AgilTec/spree_variant_options.git', :branch => "2-4-stable"
+# Spree 3.0.X
+gem 'spree_variant_options', :git => 'git://github.com/AgilTec/spree_variant_options.git', :branch => "3.0.0"
 ```
 
 If you're on an older version of Spree, please reference the [Versionfile](https://github.com/citrus/spree_variant_options/blob/master/Versionfile) for your Spree version.
@@ -101,7 +103,7 @@ bundle install
 bundle exec dummier
 
 # cucumber/capybara
-bundle exec rake cucumber
+bundle exec cucumber
 
 # test/unit
 bundle exec rake test

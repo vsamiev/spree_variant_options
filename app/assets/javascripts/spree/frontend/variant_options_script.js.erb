@@ -266,6 +266,10 @@ function VariantOptions(params) {
         selection.addClass('out-of-stock').attr('title', i18n.out_of_stock);
     });
   };
+
+  return function () {
+    find_variant();
+  }
+
   $(document).ready(init);
-  return variant;
 };
